@@ -134,9 +134,9 @@ public class TelaCadastroAnimal extends javax.swing.JFrame {
         try {
             Animal a = new Animal();
             a.setNome(jTextFieldNome.getText());
-            //a.setEspecie(Especie.values()[jComboBoxEspecie.getSelectedIndex()]);
-            //a.setAltura(Double.valueOf(jTextFieldAltura.getText()));
-            //a.setComprimento(Double.valueOf(jTextFieldComprimento.getText()));
+            a.setEspecie(Especie.values()[jComboBoxEspecie.getSelectedIndex()]);
+            a.setAltura(Double.valueOf(jTextFieldAltura.getText()));
+            a.setComprimento(Double.valueOf(jTextFieldComprimento.getText()));
             //a.setDono((Dono) jComboBoxDono.getSelectedItem());
                        
             EntityManager em = EntityManagerUtil.getEntityManager();
@@ -148,13 +148,13 @@ public class TelaCadastroAnimal extends javax.swing.JFrame {
 
             em.getTransaction().commit();
 
-            /*Query query = em.createNamedQuery("findAllAnimal");
+           Query query = em.createNamedQuery("findAllAnimal");
       
             List<Animal> animaisNamedQuery = query.getResultList();
 
             for (int i = 0; i < animaisNamedQuery.size(); i++) {
                 System.out.println("Nome animal: " + animaisNamedQuery.get(i).getNome());
-            }*/
+            }
        
         } catch (CadastroException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
