@@ -212,9 +212,11 @@ public class TelaCadastroPorteFaixa extends javax.swing.JFrame {
             jTable1.setGridColor(Color.DARK_GRAY);
             jTable1.setAutoCreateRowSorter(true);
             jTable1.setAutoCreateColumnsFromModel(true);
+            jTable1.setRowHeight(100);
+            
             for (int i=0; i<=4; i++){
                 for (int j=0; j<4;j++)
-                jTable1.setValueAt(pf.getAlturaFinal().toString(), i, j);
+                jTable1.setValueAt(pf.getAlturaFinal().toString().indexOf(i), i, j);
             }
            Query query = em.createNamedQuery("findAllPorteFaixa");
       
