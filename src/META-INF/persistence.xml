@@ -9,7 +9,6 @@
       <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="hibernate.connection.password" value="app"/>
       <property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/sample"/>
-      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
     </properties>
   </persistence-unit>
 </persistence>
