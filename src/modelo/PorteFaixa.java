@@ -17,8 +17,8 @@ import javax.persistence.Table;
 @Table(name = "porteFaixa")
 @NamedQueries({
     @NamedQuery(name="findAllPorteFaixa", query="from PorteFaixa"),
-   // @NamedQuery(name="findAnimalById", 
-    //    query="from Animal WHERE id = :id")
+   // @NamedQuery(name="findPorteFaixaById", 
+    //    query="from PorteFaixa WHERE id = :id")
 })
 public class PorteFaixa implements Serializable{
     
