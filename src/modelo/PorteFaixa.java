@@ -3,15 +3,42 @@ package modelo;
 import enumerations.Especie;
 import enumerations.Porte;
 import exceptions.CadastroException;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-public class PorteFaixa {
-
+@Entity
+@Table(name = "porteFaixa")
+@NamedQueries({
+    @NamedQuery(name="findAllPorteFaixa", query="from PorteFaixa"),
+   // @NamedQuery(name="findAnimalById", 
+    //    query="from Animal WHERE id = :id")
+})
+public class PorteFaixa implements Serializable{
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID_PORTEFAIXA")
+    private long id;
+    @Column(name =  "ALTURAINICIAL")
     private Double alturaInicial;
+    @Column(name = "ALTURAFINAL")
     private Double alturaFinal;
+    @Column(name = "COMPRIMENTOINICIAL")
     private Double comprimentoInicial;
+    @Column(name = "COMPRIMENTOFINAL")
     private Double comprimentoFinal;
     private Especie especie;
     private Porte porte;
+
+    public PorteFaixa() {
+    }
 
     public PorteFaixa(Double alturaInicial, Double alturaFinal, Double comprimentoInicial, Double comprimentoFinal, Especie especie, Porte porte) {
         super();
@@ -96,7 +123,7 @@ public class PorteFaixa {
 
     @Override
     public String toString() {
-        return especie.toString().toLowerCase() + " " + porte.toString().toLowerCase();
+        return /*especie.toString().toLowerCase() +*/ " teste" /*+ porte.toString().toLowerCase()*/;
     }
 
     @Override

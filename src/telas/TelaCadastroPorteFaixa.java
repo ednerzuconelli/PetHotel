@@ -4,10 +4,13 @@
  */
 package telas;
 
-import controle.ControladorCadastro;
+import conexao.EntityManagerUtil;
 import enumerations.Especie;
 import enumerations.Porte;
 import exceptions.CadastroException;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import modelo.PorteFaixa;
 
@@ -166,17 +169,33 @@ public class TelaCadastroPorteFaixa extends javax.swing.JFrame {
 
     private void jButtonCadastroPorteFaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroPorteFaixaActionPerformed
         try {
-            Double alturaInicial = Double.valueOf(jTextFieldPorteFaixaAlturaInicial.getText());
-            Double alturaFinal = Double.valueOf(jTextFieldPorteFaixaAlturaFinal.getText());
-            Double comprimentoInicial = Double.valueOf(jTextFieldPorteFaixaCompInicial.getText());
-            Double comprimentoFinal = Double.valueOf(jTextFieldPorteFaixaCompFinal.getText());
-            Especie especie = Especie.values()[jComboBoxPorteFaixaEspecie.getSelectedIndex()];
-            Porte porte = Porte.values()[jComboBoxPorteFaixaPorte.getSelectedIndex()];
-            PorteFaixa portefaixa = new PorteFaixa(alturaInicial, alturaFinal, comprimentoInicial, comprimentoFinal, especie, porte);
+            PorteFaixa pf = new PorteFaixa();
+            pf.setAlturaInicial(Double.valueOf(jTextFieldPorteFaixaAlturaInicial.getText()));
+            pf.setAlturaFinal(Double.valueOf(jTextFieldPorteFaixaAlturaFinal.getText()));
+            pf.setComprimentoInicial(Double.valueOf(jTextFieldPorteFaixaCompInicial.getText()));
+            pf.setComprimentoFinal(Double.valueOf(jTextFieldPorteFaixaCompFinal.getText()));
+          //  Especie especie = Especie.values()[jComboBoxPorteFaixaEspecie.getSelectedIndex()];
+          //  Porte porte = Porte.values()[jComboBoxPorteFaixaPorte.getSelectedIndex()];
+          //  PorteFaixa portefaixa = new PorteFaixa(alturaInicial, alturaFinal, comprimentoInicial, comprimentoFinal, especie, porte);
 
-            ControladorCadastro.cadastrar(portefaixa);
-            
-            JOptionPane.showMessageDialog(this, "Faixa de porte para " + portefaixa + " cadastrada com sucesso.");
+          //  ControladorCadastro.cadastrar(portefaixa);
+           EntityManager em = EntityManagerUtil.getEntityManager();
+
+            em.getTransaction().begin();
+
+            em.persist(pf);
+            //em.persist(foneRes);
+
+            em.getTransaction().commit();
+
+           Query query = em.createNamedQuery("findAllPorteFaixa");
+      
+            List<PorteFaixa> porteFaixaNamedQuery = query.getResultList();
+
+            for (int i = 0; i < porteFaixaNamedQuery.size(); i++) {
+                System.out.println("Porte Faixa: " + porteFaixaNamedQuery.get(i).toString());
+            } 
+            //JOptionPane.showMessageDialog(this, "Faixa de porte para " + portefaixa + " cadastrada com sucesso.");
         } catch (CadastroException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (NumberFormatException e) {
