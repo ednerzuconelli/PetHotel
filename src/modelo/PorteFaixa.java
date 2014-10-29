@@ -34,7 +34,9 @@ public class PorteFaixa implements Serializable{
     private Double comprimentoInicial;
     @Column(name = "COMPRIMENTOFINAL")
     private Double comprimentoFinal;
+    @Column(name = "ESPECIE")
     private Especie especie;
+    @Column(name = "PORTE")
     private Porte porte;
 
     public PorteFaixa() {

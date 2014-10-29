@@ -94,18 +94,9 @@ public class TelaCadastroPorteFaixa extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jTable1);
+        jTable1.setColumnModel(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,7 +169,7 @@ public class TelaCadastroPorteFaixa extends javax.swing.JFrame {
                             .addComponent(jComboBoxPorteFaixaPorte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCadastroPorteFaixa)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,8 +186,9 @@ public class TelaCadastroPorteFaixa extends javax.swing.JFrame {
             pf.setAlturaFinal(Double.valueOf(jTextFieldPorteFaixaAlturaFinal.getText()));
             pf.setComprimentoInicial(Double.valueOf(jTextFieldPorteFaixaCompInicial.getText()));
             pf.setComprimentoFinal(Double.valueOf(jTextFieldPorteFaixaCompFinal.getText()));
-          //  Especie especie = Especie.values()[jComboBoxPorteFaixaEspecie.getSelectedIndex()];
-          //  Porte porte = Porte.values()[jComboBoxPorteFaixaPorte.getSelectedIndex()];
+            pf.setEspecie(Especie.values()[jComboBoxPorteFaixaEspecie.getSelectedIndex()]);
+            //Especie especie = Especie.values()[jComboBoxPorteFaixaEspecie.getSelectedIndex()];
+            pf.setPorte(Porte.values()[jComboBoxPorteFaixaPorte.getSelectedIndex()]);
           //  PorteFaixa portefaixa = new PorteFaixa(alturaInicial, alturaFinal, comprimentoInicial, comprimentoFinal, especie, porte);
 
           //  ControladorCadastro.cadastrar(portefaixa);
@@ -213,10 +205,12 @@ public class TelaCadastroPorteFaixa extends javax.swing.JFrame {
             jTable1.setAutoCreateRowSorter(true);
             jTable1.setAutoCreateColumnsFromModel(true);
             jTable1.setRowHeight(100);
+            int collum = jTable1.getColumnCount();
+            int line = jTable1.getRowCount();
             
-            for (int i=0; i<=4; i++){
-                for (int j=0; j<4;j++)
-                jTable1.setValueAt(pf.getAlturaFinal().toString().indexOf(i), i, j);
+            for (int i=0; i<=line; i++){
+                for (int j=0; j<collum;j++)
+                jTable1.setValueAt(pf.getAlturaInicial(), i, j);
             }
            Query query = em.createNamedQuery("findAllPorteFaixa");
       
